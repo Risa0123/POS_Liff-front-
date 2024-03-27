@@ -1,0 +1,33 @@
+name: Liff app tech0-gen-5-step4-studentwebapp-5
+
+deploy:
+  environment: production
+  provider: azure
+  region: eastus
+  runtime: node.js
+  version: 14
+  script:
+    - npm install
+    - npm run build
+    - npm start
+  on:
+    branch: main
+
+  jobs:
+   build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.11'  # Python のバージョンを指定
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
