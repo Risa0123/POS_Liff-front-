@@ -1,0 +1,29 @@
+name: frontend
+
+deploy:
+  environment: production
+  provider: azure
+  region: eastus
+  runtime: node.js
+  version: 14
+  script:
+    - npm install
+    - npm run build
+    - npm start
+  on:
+    branch: main
+
+  jobs:
+   build:
+    runs-on: ubuntu-latest
+
+    steps:
+  - name: Checkout repository
+    uses: actions/checkout@v2
+
+  - name: Install dependencies and build
+    run:
+      npm install
+      npm run build
+      npm start
+
